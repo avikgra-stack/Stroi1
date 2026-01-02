@@ -1,0 +1,7 @@
+{
+  "name": "StroyMaster Construction",
+  "description": "Modern landing page for a premier construction company featuring AI consultation.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
