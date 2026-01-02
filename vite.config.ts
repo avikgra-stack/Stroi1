@@ -1,25 +1,23 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import path from 'path';
+import { defineConfig, loadEnv } from 'vite';
+import react from '@vitejs/plugin-react';
 
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [react()],
-  
-  // Укажите здесь имя вашего репозитория между слэшами
-  base: '/Stroi1/', 
-
-  build: {
-    outDir: 'dist',
-    assetsDir: 'assets',
-    // Оптимизация сборки: объединение мелких CSS файлов в один
-    cssCodeSplit: false,
-    // Убираем предупреждения о размере бандла для тяжелых нейросетевых библиотек
-    chunkSizeWarningLimit: 1000,
-  },
-  resolve: {
-    alias: {
-      // Это позволит использовать красивые пути в будущем (например, '@/components/...')
-      '@': '/',
-    },
-  },
-})
+export default defineConfig(({ mode }) => {
+    const env = loadEnv(mode, '.', '');
+    return {
+      server: {
+        port: 3000,
+        host: '0.0.0.0',
+      },
+      plugins: [react()],
+      define: {
+        'process.env.API_KEY': JSON.stringify(env.GEMINI_API_KEY),
+        'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY)
+      },
+      resolve: {
+        alias: {
+          '@': path.resolve(__dirname, '.'),
+        }
+      }
+    };
+});
