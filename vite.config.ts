@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   
   // Укажите здесь имя вашего репозитория между слэшами
-  base: '/ai-engineer/', 
+  base: '/Stroi1/', 
 
   build: {
     outDir: 'dist',
